@@ -1,5 +1,5 @@
 /* ShambaSkills offline worker: keeps the app working with no internet. */
-const CACHE = "shambaskills-v40";
+const CACHE = "shambaskills-v42";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png", "./pdf.js"];
 
 self.addEventListener("install", e => {
