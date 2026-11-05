@@ -1,0 +1,207 @@
+/**
+ * ShambaSkills institution sync server (Google Apps Script).
+ * Stores every record as a small JSON file in a Google Drive folder called "ShambaSkills Data".
+ *
+ * Set up (once, by the administrator):
+ * 1. Go to script.google.com, click New project, delete the sample code and paste this whole file.
+ * 2. Project Settings (gear) > Script properties > Add property:
+ *      STAFF_KEY = a long secret phrase only assessors and the administrator know.
+ * 3. Deploy > New deployment > type "Web app".
+ *      Execute as: Me.   Who has access: Anyone.   Click Deploy, allow access.
+ * 4. Copy the Web app URL (ends with /exec) and paste it, with the STAFF_KEY,
+ *    into ShambaSkills > Admin > Wi-Fi sync.
+ * 5. Forgot password: the first deployment asks you to allow "Send email as you".
+ *    Allow it. Reset codes are emailed from the account that owns this script,
+ *    to the email the administrator registered for each user.
+ *    After changing this file: Deploy > Manage deployments > Edit > Version: New version > Deploy.
+ */
+const FOLDER_NAME = 'ShambaSkills Data';
+const STAFF_COLLS = ['ev', 'mt', 'fb', 'coach', 'log', 'config'];
+const PUBLIC_COLLS = ['ev', 'mt', 'fb', 'coach'];
+
+function folder_() {
+  const it = DriveApp.getFoldersByName(FOLDER_NAME);
+  return it.hasNext() ? it.next() : DriveApp.createFolder(FOLDER_NAME);
+}
+function mask_(e) {
+  const p = String(e).split('@'); if (p.length !== 2) return '';
+  return p[0].slice(0, 2) + '***@' + p[1];
+}
+function digest_(s) {
+  return Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, s));
+}
+function readConfig_(f) {
+  const it = f.getFilesByName('config__main.json');
+  if (!it.hasNext()) return null;
+  const file = it.next();
+  try { return { file: file, rec: JSON.parse(file.getBlob().getDataAsString()) }; } catch (err) { return null; }
+}
+function staffLogin_(f, req) {
+  if (!req.user || !req.auth) return false;
+  const cf = readConfig_(f);
+  if (!cf || !cf.rec || !cf.rec.data || !Array.isArray(cf.rec.data.users)) return req.bootstrap === true; // very first setup only
+  const u = cf.rec.data.users.filter(function (x) { return x && x.id === String(req.user); })[0];
+  return !!u && u.active !== false && (u.role === 'admin' || u.role === 'assessor') && u.hash === String(req.auth);
+}
+// Staff log in on a new phone: checks the password here and returns the settings the phone needs.
+function onlineLogin_(f, req) {
+  const code = String(req.code || '').toUpperCase().trim(), role = String(req.role || ''), props = PropertiesService.getScriptProperties();
+  const k = 'lg_' + code.replace(/[^A-Z0-9]/g, '').slice(0, 30), now = Date.now();
+  let st = {}; try { st = JSON.parse(props.getProperty(k) || '{}'); } catch (e) { st = {}; }
+  if (st.until && st.until > now) return { ok: false, error: 'locked', until: st.until };
+  const cf = readConfig_(f);
+  if (!cf || !cf.rec || !cf.rec.data || !Array.isArray(cf.rec.data.users)) return { ok: false, error: 'nosettings' };
+  const u = cf.rec.data.users.filter(function (x) { return x && String(x.code || '').toUpperCase() === code && x.role === role && x.active !== false; })[0];
+  if (!u || pwHash_(u.id, String(req.password || '')) !== u.hash) {
+    const n = (st.n || 0) + 1; props.setProperty(k, JSON.stringify(n >= 8 ? { n: 0, until: now + 15 * 60000 } : { n: n }));
+    return { ok: false, error: 'wrong' };
+  }
+  props.deleteProperty(k);
+  const data = JSON.parse(JSON.stringify(cf.rec.data)); delete data.sync;
+  if (role !== 'admin' && role !== 'assessor') data.users = data.users.filter(function (x) { return x.role === 'mentor' || x.role === 'candidate' || x.id === u.id; }).map(function (x) { delete x.email; if (x.role === 'candidate') delete x.name; return x; });
+  return { ok: true, user: u.id, config: data };
+}
+function out_(o) {
+  return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
+}
+function safeId_(s) { return String(s || '').replace(/[^A-Za-z0-9_-]/g, '').slice(0, 40); }
+
+function doGet() { return out_({ ok: true, app: 'shambaskills', version: 'v42', message: 'ShambaSkills sync server is running.', time: Date.now() }); }
+
+function doPost(e) {
+  let req;
+  try { req = JSON.parse((e && e.postData && e.postData.contents) || '{}'); } catch (err) { return out_({ ok: false, error: 'bad json' }); }
+  const staffKey = PropertiesService.getScriptProperties().getProperty('STAFF_KEY') || '';
+  const lock = LockService.getScriptLock();
+  lock.waitLock(25000);
+  try {
+    const f = folder_();
+    // Staff are recognised by their own ShambaSkills login (no shared key on phones),
+    // or by the STAFF_KEY kept only here for first-time setup.
+    const staff = (!!staffKey && req.key === staffKey) || staffLogin_(f, req);
+    if (req.action === 'ping') return out_({ ok: true, staff: staff, version: 'v42', hasKey: !!staffKey, time: Date.now() });
+    if (req.action === 'login') return out_(onlineLogin_(f, req));
+    if (req.action === 'forgot' || req.action === 'resetpw') {
+      const uid = safeId_(req.user), cf = readConfig_(f);
+      const users = cf && cf.rec && cf.rec.data && Array.isArray(cf.rec.data.users) ? cf.rec.data.users : [];
+      const u = users.filter(function (x) { return x && x.id === uid && x.active !== false; })[0];
+      if (!u) return out_({ ok: false, error: 'nouser' });
+      if (!u.email || String(u.email).indexOf('@') < 1) return out_({ ok: false, error: 'noemail' });
+      const props = PropertiesService.getScriptProperties(), key = 'rst_' + uid, now = Date.now();
+      let st = {}; try { st = JSON.parse(props.getProperty(key) || '{}'); } catch (err) { st = {}; }
+      if (req.action === 'forgot') {
+        const fresh = st.first && now - st.first < 3600000;
+        if (fresh && st.n >= 3) return out_({ ok: false, error: 'toomany' });
+        const code = String(Math.floor(100000 + Math.random() * 900000));
+        props.setProperty(key, JSON.stringify({ h: digest_(code + '|' + uid), exp: now + 15 * 60000, tries: 0, n: fresh ? st.n + 1 : 1, first: fresh ? st.first : now }));
+        MailApp.sendEmail({
+          to: u.email,
+          subject: 'ShambaSkills password reset code',
+          body: 'Hello ' + (u.name || '') + ',\n\nYour ShambaSkills password reset code is: ' + code +
+            '\n\nType it in the app within 15 minutes, then choose a new password.\n' +
+            'If you did not ask for this, ignore this email; your password has not changed.\n\nKisii National Polytechnic · ShambaSkills'
+        });
+        return out_({ ok: true, to: mask_(u.email) });
+      }
+      // resetpw
+      if (!st.h || now > st.exp) return out_({ ok: false, error: 'expired' });
+      if (st.tries >= 5) return out_({ ok: false, error: 'toomany' });
+      if (digest_(String(req.code || '') + '|' + uid) !== st.h) { st.tries = (st.tries || 0) + 1; props.setProperty(key, JSON.stringify(st)); return out_({ ok: false, error: 'badcode', left: 5 - st.tries }); }
+      const hash = String(req.hash || '');
+      if (!/^[a-z0-9]{6,40}$/.test(hash)) return out_({ ok: false, error: 'badhash' });
+      u.hash = hash; u.mustChange = false; u.pwAt = now;
+      cf.rec.data.updatedAt = now;
+      cf.file.setContent(JSON.stringify({ c: 'config', id: 'main', data: cf.rec.data, updated: now }));
+      props.deleteProperty(key);
+      return out_({ ok: true, at: now });
+    }
+    if (req.action === 'push') {
+      let saved = 0;
+      (req.records || []).slice(0, 25).forEach(function (r) {
+        const c = String(r.c || ''), id = safeId_(r.id);
+        if (!id || !(staff ? STAFF_COLLS : PUBLIC_COLLS).includes(c)) return;
+        const name = c + '__' + id + '.json';
+        const it = f.getFilesByName(name);
+        const exists = it.hasNext();
+        if (!staff) {
+          // Candidates and mentors may only add new records, never change marks.
+          if (exists) return;
+          if (c === 'ev' && r.data) { r.data.review = null; r.data.ai = null; }
+          if (c === 'mt' && r.data) { r.data.ack = null; }
+        }
+        if (c === 'config' && exists && r.data && Array.isArray(r.data.users)) {
+          // Keep a password reset by email if it is newer than the copy this phone sends.
+          try {
+            const old = JSON.parse(f.getFilesByName(name).next().getBlob().getDataAsString()).data || {};
+            const at = function (u) { return Math.max(Number(u && u.pwAt) || 0, Number(u && u.resetAt) || 0, Number(u && u.created) || 0); };
+            r.data.users = r.data.users.map(function (u) {
+              const o = (old.users || []).filter(function (x) { return x && u && x.id === u.id; })[0];
+              if (o && at(o) > at(u)) { u.hash = o.hash; u.mustChange = !!o.mustChange; u.pwAt = o.pwAt; u.resetAt = o.resetAt; }
+              return u;
+            });
+          } catch (err) { }
+        }
+        const body = JSON.stringify({ c: c, id: id, data: r.data, updated: Date.now() });
+        if (exists) it.next().setContent(body); else f.createFile(name, body, 'application/json');
+        saved++;
+      });
+      return out_({ ok: true, saved: saved });
+    }
+    if (req.action === 'pull') {
+      const since = Number(req.since || 0), trainee = String(req.trainee || '').toUpperCase(), mentor = String(req.mentor || '');
+      const files = f.getFiles(), records = [];
+      let max = since;
+      while (files.hasNext()) {
+        const file = files.next(), t = file.getLastUpdated().getTime();
+        if (t <= since) continue;
+        if (t > max) max = t;
+        const name = file.getName(), c = name.split('__')[0];
+        if (!staff && c !== 'config' && c !== 'ev' && c !== 'mt') continue;
+        let rec;
+        try { rec = JSON.parse(file.getBlob().getDataAsString()); } catch (err) { continue; }
+        if (!staff && c === 'ev') { if (!rec.data || String(rec.data.trainee || '').toUpperCase() !== trainee || !trainee) continue; }
+        if (!staff && c === 'mt') { if (!mentor || !rec.data || String(rec.data.mentorId || '') !== mentor) continue; }
+        if (!staff && c === 'config' && rec.data) {
+          // Mentor and candidate phones need those accounts to log in (no emails, no candidate names);
+          // assessor and admin accounts never leave staff phones.
+          rec.data.users = Array.isArray(rec.data.users) ? rec.data.users.filter(function (u) { return u && (u.role === 'mentor' || u.role === 'candidate'); }).map(function (u) { const c = JSON.parse(JSON.stringify(u)); delete c.email; if (c.role === 'candidate') delete c.name; return c; }) : [];
+          delete rec.data.sync;
+        }
+        records.push(rec);
+      }
+      return out_({ ok: true, records: records, now: max, staff: staff });
+    }
+    return out_({ ok: false, error: 'unknown action' });
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+/**
+ * EMERGENCY: reset a forgotten administrator password.
+ * Only the owner of this Google account can run it, from the Apps Script editor:
+ * choose emergencyResetAdmin in the function list at the top, click Run,
+ * then read the temporary password in the Execution log at the bottom.
+ * The administrator logs in with it and must choose a new password at once.
+ */
+function emergencyResetAdmin() {
+  const f = folder_(), cf = readConfig_(f);
+  if (!cf || !cf.rec || !cf.rec.data || !Array.isArray(cf.rec.data.users)) { Logger.log('No ShambaSkills settings found on the server yet. Sync the administrator phone once first.'); return; }
+  const admins = cf.rec.data.users.filter(function (u) { return u && u.role === 'admin'; });
+  if (!admins.length) { Logger.log('No administrator account found.'); return; }
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+  let temp = ''; for (let i = 0; i < 8; i++) temp += chars.charAt(Math.floor(Math.random() * chars.length));
+  const now = Date.now(), u = admins.filter(function (x) { return x.active !== false; })[0] || admins[0];
+  u.hash = pwHash_(u.id, temp); u.mustChange = true; u.active = true; u.resetAt = now;
+  cf.rec.data.updatedAt = now;
+  cf.file.setContent(JSON.stringify({ c: 'config', id: 'main', data: cf.rec.data, updated: now }));
+  Logger.log('Administrator account: ' + u.name + ' (' + u.code + ')');
+  Logger.log('Temporary password: ' + temp);
+  Logger.log('On the administrator phone: connect to the internet, open ShambaSkills, wait 10 seconds, tap Administrator and log in with this password. You will be asked to choose a new one.');
+}
+// Same password scrambling as the app (do not change).
+function pwHash_(salt, p) {
+  let h1 = 5381, h2 = 52711; const t = 'shambaskills|' + salt + '|' + String(p);
+  for (let r = 0; r < 800; r++) for (let i = 0; i < t.length; i++) { const c = t.charCodeAt(i) ^ r; h1 = (Math.imul(h1, 33) ^ c) >>> 0; h2 = (Math.imul(h2, 31) + c) >>> 0; }
+  return h1.toString(36) + h2.toString(36);
+}
