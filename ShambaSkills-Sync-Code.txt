@@ -94,12 +94,14 @@ function doPost(e) {
         if (fresh && st.n >= 3) return out_({ ok: false, error: 'toomany' });
         const code = String(Math.floor(100000 + Math.random() * 900000));
         props.setProperty(key, JSON.stringify({ h: digest_(code + '|' + uid), exp: now + 15 * 60000, tries: 0, n: fresh ? st.n + 1 : 1, first: fresh ? st.first : now }));
+        const NL = String.fromCharCode(10);
         MailApp.sendEmail({
           to: u.email,
           subject: 'ShambaSkills password reset code',
-          body: 'Hello ' + (u.name || '') + ',\n\nYour ShambaSkills password reset code is: ' + code +
-            '\n\nType it in the app within 15 minutes, then choose a new password.\n' +
-            'If you did not ask for this, ignore this email; your password has not changed.\n\nKisii National Polytechnic · ShambaSkills'
+          body: ['Hello ' + (u.name || '') + ',', '', 'Your ShambaSkills password reset code is: ' + code, '',
+            'Type it in the app within 15 minutes, then choose a new password.',
+            'If you did not ask for this, ignore this email; your password has not changed.', '',
+            'Kisii National Polytechnic - ShambaSkills'].join(NL)
         });
         return out_({ ok: true, to: mask_(u.email) });
       }
@@ -204,4 +206,20 @@ function pwHash_(salt, p) {
   let h1 = 5381, h2 = 52711; const t = 'shambaskills|' + salt + '|' + String(p);
   for (let r = 0; r < 800; r++) for (let i = 0; i < t.length; i++) { const c = t.charCodeAt(i) ^ r; h1 = (Math.imul(h1, 33) ^ c) >>> 0; h2 = (Math.imul(h2, 31) + c) >>> 0; }
   return h1.toString(36) + h2.toString(36);
+}
+
+/**
+ * RUN THIS ONCE after pasting the code: choose "authorize" in the function list at the top, click Run,
+ * and allow every permission Google asks for. It changes nothing; it only lets the server use
+ * Google Drive (records), email (forgot password) and its settings.
+ */
+function authorize() {
+  const f = folder_();
+  Logger.log('Drive folder OK: ' + f.getName());
+  Logger.log('Email quota left today: ' + MailApp.getRemainingDailyQuota());
+  Logger.log('STAFF_KEY set: ' + (PropertiesService.getScriptProperties().getProperty('STAFF_KEY') ? 'yes' : 'NO - add it in Project Settings'));
+  LockService.getScriptLock().tryLock(1000);
+  const cf = readConfig_(f);
+  Logger.log(cf ? 'ShambaSkills settings found on the server.' : 'No settings yet: log in as Administrator in the app and sync.');
+  Logger.log('All permissions granted. Now: Deploy > Manage deployments > Edit > Version: New version > Deploy.');
 }
