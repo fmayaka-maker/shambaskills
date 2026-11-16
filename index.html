@@ -124,6 +124,7 @@ ol.how li::marker{color:var(--accent);font-weight:800}
 .pacard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(var(--accent),var(--gold))}
 .pacard:hover:not(:disabled){transform:translateY(-2px);box-shadow:var(--shadow-lg);border-color:var(--accent-2)}
 .pacard b{font-family:var(--display);font-size:1.05rem}
+.pacard:disabled{opacity:1;background:var(--bg2);border-style:dashed;cursor:not-allowed}.pacard:disabled .stepno,.pacard:disabled .muted{color:#4b5563}
 .pacard.sel{border-color:var(--gold);box-shadow:0 0 0 4px var(--gold-soft),var(--shadow)}
 /* record form */
 .recgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
