@@ -493,7 +493,194 @@ const DEFAULT_PAS = [
     notes: ["Examine region by region: head and neck, chest, abdomen, limbs and body surface.", "Normal values for adult cattle: temperature about 38.0 to 39.5 degrees centigrade, heart rate about 48 to 84 beats per minute, breathing about 10 to 30 breaths per minute.", "Milk fever (low blood calcium) usually affects high-yielding cows around calving: weakness, lying on the chest with the head turned to the flank, cold ears and legs, low temperature, weak heart sounds and a still rumen. The drug of choice is calcium borogluconate given slowly into the vein.", "Grass tetany (low blood magnesium) causes nervousness, muscle twitching and convulsions, often on lush pasture. It is treated with magnesium, for example magnesium sulphate.", "Control: feed a correctly balanced diet in the dry period, avoid over-fat cows at calving, give calcium or magnesium supplements as advised, and watch high-risk cows closely around calving.", "Multivitamin, dexamethasone and antihistamine do not correct a calcium or magnesium deficiency."],
     mentorQ: [],
     record: "metab"
+  }  ,
+  {
+    id: "dairy1", no: 8, printNo: 1,
+    course: { programme: "DIPLOMA IN FOOD SCIENCE AND TECHNOLOGY", courseCode: "", unit: "PROCESS DAIRY PRODUCTS", unitCode: "0721 451 07A", series: "NOVEMBER 2026", classes: "" },
+    title: "Perform raw milk quality tests",
+    required: ["Carry out organoleptic tests on a raw milk sample: colour, odour and foreign material", "Carry out chemical tests: alcohol test, titratable acidity and lactometer density", "Carry out a microbial dye-reduction test (methylene blue or resazurin)", "Assign the milk quality grade and complete the milk reception quality sheet"],
+    time: 90,
+    resources: ["Raw milk sample from a delivery", "Alcohol test reagent (68–75% ethanol)", "Phenolphthalein indicator and 0.1 N sodium hydroxide titration set", "Lactometer and measuring cylinder", "Methylene blue or resazurin reagent, water bath or incubator at 37 °C, stopwatch", "Clean test tubes, pipettes and sample bottles", "Milk reception quality sheet", "PPE: lab coat and gloves"],
+    assessorNotes: ["Observe each test as the candidate performs it and tick the item at that point.", "Check the candidate's readings against your own before the sample proceeds to the next test.", "The microbial test may be set up at the start so the colour change can be observed within the session.", "Ensure the candidate has a name tag and registration code at the back and front."],
+    steps: [
+      { t: "Put on protective clothing and prepare the bench", how: ["Wear a clean lab coat and gloves.", "Clean and lay out the test tubes, pipettes, lactometer, reagents and the quality sheet.", "Write the supplier, sample number and time of delivery on the quality sheet."], safety: "Never pipette by mouth. Keep alcohol reagent away from flames." },
+      { t: "Collect a representative sample", how: ["Stir or plunge the milk in the can or tank well before sampling.", "Take the sample with a clean dipper into a clean, labelled sample bottle.", "Keep the sample cool and test it as soon as possible."], safety: "A sample from the top of unstirred milk gives a false fat and density reading." },
+      { t: "Carry out the organoleptic tests", how: ["Look at the colour: normal milk is white to slightly yellow. Note any pink, blue or watery look.", "Smell the sample: note sour, feedy, cowy or chemical odours.", "Check for dirt, hair, flies or clots by tilting the sample bottle.", "Record colour, odour and foreign material on the quality sheet."], safety: "Do not taste raw milk." },
+      { t: "Perform the alcohol test", how: ["Pipette equal volumes of milk and alcohol reagent (for example 2 ml and 2 ml) into a clean test tube.", "Mix gently by tilting the tube three or four times.", "Look for flakes or clots on the wall of the tube.", "Clots or flakes mean the milk is unstable to heat and should be rejected. Record Positive or Negative."], safety: "A positive alcohol test often means the milk is already turning sour." },
+      { t: "Perform the titratable acidity test", how: ["Pipette 9 ml (or 10 ml) of milk into a clean flask or beaker.", "Add 3 to 5 drops of phenolphthalein indicator.", "Titrate with 0.1 N sodium hydroxide from the burette, swirling, until a faint pink colour lasts 30 seconds.", "Read the volume used and calculate % lactic acid: with 9 ml milk, each 1 ml of 0.1 N NaOH equals 0.1% lactic acid.", "Record the result. Fresh milk is usually 0.14–0.18% lactic acid."], safety: "Sodium hydroxide burns skin and eyes. Rinse splashes with plenty of water." },
+      { t: "Check milk density with the lactometer", how: ["Pour milk into the measuring cylinder without making froth.", "Lower the lactometer gently and let it float freely.", "Read the scale at the milk surface, at eye level, and note the milk temperature.", "Correct the reading to 20 °C if your lactometer requires it. Normal milk reads about 26 to 32 (1.026–1.032)."], safety: "A low reading suggests added water; a high reading suggests skimmed milk." },
+      { t: "Carry out the dye-reduction (microbial) test", how: ["Pipette 10 ml of milk into a sterile test tube and add 1 ml of methylene blue (or the resazurin volume given in the kit instructions).", "Stopper, invert gently to mix, and place the tube in the water bath at 37 °C. Start the stopwatch.", "Check the tube at the intervals given for the test (for example every 30 minutes for methylene blue, or at 10 minutes for the one-hour resazurin test).", "Record the time taken for the blue colour to disappear (methylene blue) or the colour reached (resazurin).", "Read the quality grade from the reference chart."], safety: "Keep the tubes out of direct light while incubating; light speeds up colour loss and gives a false result." },
+      { t: "Assign the grade and complete the quality sheet", how: ["Compare every result with the dairy's acceptance requirements.", "Decide: accept, accept provisionally or reject, and give the reason.", "Enter all results, the grade and your signature on the milk reception quality sheet.", "Hand the completed sheet to your trainer."], safety: "" }
+    ],
+    checklist: [
+      { t: "PPE worn correctly for milk quality testing: lab coat and gloves", m: 2, g: "Award 2 marks or zero" },
+      { t: "Organoleptic test carried out and colour, odour and foreign material recorded", m: 3, g: "Award 1 mark for each of colour, odour and foreign material" },
+      { t: "Alcohol test performed with equal volumes and result correctly interpreted", m: 3, g: "Award 3 marks or zero" },
+      { t: "Titratable acidity test performed using correct titration technique and result calculated", m: 4, g: "Award 2 marks for technique, 2 for correct calculation" },
+      { t: "Milk density checked using the lactometer and reading recorded correctly", m: 3, g: "Award 3 marks or zero" },
+      { crit: true, t: "Microbial (dye-reduction) test carried out correctly and reduction time recorded", m: 4, g: "Award 2 marks for set-up, 2 for timing and recording" },
+      { t: "Milk quality grade assigned correctly from the full test panel and quality sheet completed", m: 3, g: "Award 3 marks or zero" }
+    ],
+    oralScored: [
+      { q: "List three organoleptic tests carried out on raw milk.", a: ["Colour", "Odour (smell)", "Foreign material", "Taste (on pasteurised milk only)"], m: 2 },
+      { q: "Outline four chemical tests used to assess raw milk quality.", a: ["Alcohol test", "Titratable acidity test", "Lactometer (density) test", "Butterfat test", "Phosphatase test"], m: 2 },
+      { q: "Explain how the methylene blue test indicates the microbial quality of milk.", a: ["Bacteria use up oxygen and reduce the blue dye to colourless", "The faster the colour disappears, the more bacteria and the poorer the milk"], m: 2 }
+    ],
+    oral: [], mentorQ: [],
+    after: ["Dispose of tested milk and reagents as directed; never return a tested sample to the bulk milk.", "Wash and rinse all glassware, the lactometer and the sample dipper, and leave them to dry.", "Switch off the water bath and wipe the bench with sanitiser.", "Remove gloves and lab coat and wash your hands.", "File the completed milk reception quality sheet."],
+    notes: ["Organoleptic tests are the fastest first check: colour, odour and foreign material.", "A positive alcohol test (clots) means the milk is unstable to heat and is rejected.", "Fresh milk acidity is about 0.14–0.18% lactic acid; higher means souring.", "A lactometer reading below about 26 suggests added water.", "In the methylene blue test, bacteria reduce the dye: the faster the blue disappears, the poorer the milk.", "Every result is judged against the dairy's own acceptance requirements and recorded, pass or fail."],
+    record: "milkq"
+  },
+  {
+    id: "dairy2", no: 9, printNo: 2,
+    course: { programme: "DIPLOMA IN FOOD SCIENCE AND TECHNOLOGY", courseCode: "", unit: "PROCESS DAIRY PRODUCTS", unitCode: "0721 451 07A", series: "NOVEMBER 2026", classes: "" },
+    title: "Pasteurize raw milk",
+    required: ["Inspect and assemble the pasteurizer and transfer tested raw milk into it", "Run a pasteurization cycle at the specified temperature, pressure and holding time, monitoring temperature, pH, pressure and time", "Cool the pasteurized milk promptly to storage temperature and confirm pasteurization with a phosphatase test", "Complete the pasteurization record and package and store the milk to specification"],
+    time: 120,
+    resources: ["Tested raw milk (accepted at reception)", "Pasteurizer (HTST plate or vat/batch)", "Calibrated thermometer, pH meter, pressure gauge and stopwatch", "Plate cooler or chiller", "Phosphatase test kit", "Packaging containers and sealer", "Pasteurization log and batch labels", "PPE: apron, heat-resistant gloves and closed shoes"],
+    assessorNotes: ["Observe the start-up inspection, the cycle and the cooling as they happen; do not rely on the record alone.", "Check the thermometer reading yourself at the start and end of the holding time.", "Take a photo or video at the holding step and at the phosphatase test result.", "Ensure the candidate has a name tag and registration code at the back and front."],
+    steps: [
+      { t: "Put on protective clothing", how: ["Wear an apron, heat-resistant gloves and closed shoes.", "Tie back hair and remove jewellery before handling milk."], safety: "Pasteurizers have hot surfaces and steam lines; keep hands and face clear of valves and joints." },
+      { t: "Inspect and assemble the pasteurizer", how: ["Follow the workplace start-up procedure step by step.", "Check that all plates, gaskets, pipes and valves are clean, sanitised and correctly fitted.", "Check the thermometer, pressure gauge and pH meter are calibrated and working.", "Run water through the system to check for leaks before adding milk."], safety: "Never operate a pasteurizer with a loose gasket or a missing guard." },
+      { t: "Transfer the tested raw milk", how: ["Use only milk that passed the reception tests.", "Transfer it to the balance tank or vat without splashing.", "Record the batch number and volume on the pasteurization log."], safety: "" },
+      { t: "Set the pasteurization parameters", how: ["Set the temperature and holding time for the product: HTST 72 °C for at least 15 seconds, or vat 63 °C for 30 minutes.", "Set the pressure on the pasteurized side higher than the raw side (HTST).", "Write the set values on the log before starting."], safety: "A lower temperature or shorter time will not kill all pathogens." },
+      { t: "Run the cycle and monitor the parameters", how: ["Start the cycle and time the holding period with the stopwatch.", "Record temperature, pH, pressure and time at the intervals set by the workplace procedure.", "If any value drifts out of range, divert or hold the milk and apply the corrective action in the procedure.", "Do not stop the cycle before the full holding time is complete."], safety: "Milk that did not reach the set temperature for the full time must be re-pasteurized, not released." },
+      { t: "Cool the milk promptly", how: ["Transfer the milk to the plate cooler or chiller immediately after holding.", "Cool to the specified storage temperature, 4 °C or below, and confirm with the calibrated thermometer.", "Record the final temperature and the time cooling was completed."], safety: "Slow cooling allows surviving heat-resistant bacteria to multiply." },
+      { t: "Carry out the phosphatase test", how: ["Take a sample of the cooled milk in a clean tube.", "Follow the kit instructions for reagent, volume, incubation time and temperature.", "Read the result: negative (no colour change) means pasteurization was effective. Record it."], safety: "A positive result means under-pasteurized milk or raw milk mixed in; do not release the batch." },
+      { t: "Complete the record, package and store", how: ["Enter batch number, achieved temperature, holding time, pressure, pH, cooling temperature and the phosphatase result on the log.", "Fill the specified containers to the correct level and seal them.", "Label with batch number and production date and move to the cold store at the specified temperature.", "Clean the pasteurizer according to the CIP or cleaning procedure."], safety: "Fill records as you go; never write them from memory afterwards." }
+    ],
+    checklist: [
+      { t: "PPE worn correctly for pasteurizer operation", m: 2, g: "Award 2 marks or zero" },
+      { t: "Pasteurization equipment correctly assembled and inspected before use", m: 3, g: "Award 3 marks or zero" },
+      { crit: true, t: "Pasteurization cycle run at the correct temperature, pressure and time", m: 4, g: "Award 4 marks or zero" },
+      { t: "Pasteurization parameters monitored continuously: temperature, pH, pressure and time", m: 4, g: "Award 1 mark for each parameter monitored and recorded" },
+      { crit: true, t: "Pasteurized milk cooled promptly to the specified storage temperature", m: 3, g: "Award 3 marks or zero" },
+      { t: "Phosphatase test carried out and interpreted to confirm pasteurization effectiveness", m: 3, g: "Award 3 marks or zero" },
+      { t: "Pasteurization record completed accurately with batch number and parameters", m: 3, g: "Award 3 marks or zero" },
+      { t: "Pasteurized milk packaged, labelled and stored correctly to product specification", m: 2, g: "Award 2 marks or zero" }
+    ],
+    oralScored: [
+      { q: "List the four parameters monitored during milk pasteurization.", a: ["Temperature", "pH", "Pressure", "Time (holding time)"], m: 2 },
+      { q: "Explain why pasteurized milk is cooled immediately after the holding period.", a: ["To limit growth of surviving heat-resistant bacteria", "To protect flavour and nutritional quality"], m: 2 },
+      { q: "Describe the purpose of the phosphatase test after pasteurization.", a: ["Confirms pasteurization was effective", "The phosphatase enzyme is destroyed at pasteurization temperature, so a negative test shows the milk reached it"], m: 2 }
+    ],
+    oral: [], mentorQ: [],
+    after: ["Clean the pasteurizer, cooler and pipes following the cleaning procedure.", "Rinse and store the thermometer, pH meter probe and phosphatase test items.", "Check the cold store temperature and record it.", "Remove PPE and wash your hands.", "File the completed pasteurization log."],
+    notes: ["Pasteurization: HTST 72 °C for 15 seconds, or vat 63 °C for 30 minutes.", "Monitor four parameters: temperature, pH, pressure and time.", "Cool rapidly to 4 °C or below to stop surviving bacteria multiplying.", "A negative phosphatase test confirms effective pasteurization.", "Records are made during the process, with batch number and achieved values, never afterwards from memory.", "Correct packaging, fill level and seal protect the milk after pasteurization."],
+    record: "pasteur"
+  },
+  {
+    id: "dairy3", no: 10, printNo: 3,
+    course: { programme: "DIPLOMA IN FOOD SCIENCE AND TECHNOLOGY", courseCode: "", unit: "PROCESS DAIRY PRODUCTS", unitCode: "0721 451 07A", series: "NOVEMBER 2026", classes: "" },
+    title: "Process a fermented milk product",
+    required: ["Assemble and sanitise the fermentation equipment and assemble the ingredients as per the product formulation", "Pasteurize the milk mix, cool it to inoculation temperature and inoculate with the starter culture", "Incubate to the specified set point, then cool to stop fermentation", "Analyse the finished product (pH, consistency, sensory) and pack, seal and label it to specification"],
+    time: 180,
+    resources: ["Fresh pasteurized or raw milk as specified", "Skimmed milk powder, sugar and stabiliser as per the formulation", "Starter culture (lactic acid bacteria) for yoghurt or mala", "Fermentation vat or tank and incubator or water bath", "Thermometer, pH meter and stopwatch", "Cold store or refrigerator", "Packaging cups or bottles, sealer and labels", "Product specification sheet and production record", "PPE: lab coat, hair net, gloves"],
+    assessorNotes: ["Incubation may take 4 to 6 hours; plan the session so inoculation and the final pH check can both be observed, or observe the set at the next session.", "Check the inoculation temperature yourself before the culture is added.", "Take a photo at inoculation and at the final pH reading.", "Ensure the candidate has a name tag and registration code at the back and front."],
+    steps: [
+      { t: "Put on protective clothing and sanitise the equipment", how: ["Wear a clean lab coat, hair net and gloves.", "Clean and sanitise the vat, stirrer, thermometer, pH probe and incubator according to the workplace procedure.", "Check that the incubator or water bath reaches the set temperature."], safety: "Fermented products are easily spoilt by unwanted bacteria; sanitation is the first control." },
+      { t: "Assemble the ingredients", how: ["Weigh the milk, skimmed milk powder, sugar and stabiliser exactly as the product formulation states.", "Check the starter culture is in date and has been stored cold.", "Record every quantity on the production record."], safety: "Do not guess quantities; a wrong ratio changes set, taste and shelf life." },
+      { t: "Pasteurise the milk mix", how: ["Dissolve the powder and sugar in the milk and stir until smooth.", "Heat the mix to the temperature and time specified for the product, for example 85–90 °C for 10 to 30 minutes for yoghurt.", "Stir to prevent scorching and record the temperature and time."], safety: "Hot milk scalds; keep the lid on and stir with a long-handled paddle." },
+      { t: "Cool to the inoculation temperature", how: ["Cool the mix quickly in cold water or the chiller to the inoculation temperature given for the culture, for example 42–45 °C for yoghurt.", "Check with the thermometer and record the temperature."], safety: "Culture added to milk that is too hot is killed; too cool and fermentation is slow." },
+      { t: "Inoculate and incubate", how: ["Add the specified amount of starter culture and stir gently to distribute it.", "Cover and place in the incubator at the specified temperature, for example 42–45 °C.", "Do not disturb the product during incubation.", "Record the time incubation started."], safety: "Keep the lid on; opening the vat lets in contaminants and heat loss." },
+      { t: "Check the set point and stop fermentation", how: ["Check the product at the specified intervals for set and acidity.", "When the pH reaches the specified point, for example pH 4.5–4.6 for yoghurt, or the product is firmly set, move it promptly to the cold store at 4 °C or below.", "Record the incubation time and the final pH."], safety: "Leaving the product warm after it has set makes it over-acid and whey separates." },
+      { t: "Analyse the finished product", how: ["Measure the pH, and the viscosity if specified.", "Check taste, texture and appearance against the product specification.", "Record every result and note any deviation."], safety: "Taste only the pasteurised, finished product, with a clean spoon each time." },
+      { t: "Pack, seal, label and store", how: ["Select the packaging format and material specified for the product.", "Fill to the specified quantity and seal correctly.", "Label with product name, batch number, production date and expiry date.", "Store in the cold store and present the product and record to your trainer."], safety: "" }
+    ],
+    checklist: [
+      { t: "Fermentation equipment correctly assembled and confirmed clean and sanitised", m: 3, g: "Award 3 marks or zero" },
+      { t: "Fermented product ingredients correctly assembled and weighed as per formulation", m: 3, g: "Award 3 marks or zero" },
+      { t: "Milk mix pasteurised at the correct temperature and time for the product", m: 3, g: "Award 3 marks or zero" },
+      { crit: true, t: "Pasteurised mix cooled to the correct inoculation temperature before adding starter culture", m: 4, g: "Award 4 marks or zero" },
+      { t: "Fermentation carried out at the correct incubation temperature and time, and stopped at the set point", m: 4, g: "Award 2 marks for temperature, 2 for time and set point" },
+      { t: "Finished product pH, consistency and sensory quality checked against specification and recorded", m: 3, g: "Award 3 marks or zero" },
+      { t: "Fermented product correctly filled, sealed and labelled with batch, production and expiry dates", m: 3, g: "Award 1 mark each for filling, sealing and labelling" }
+    ],
+    oralScored: [
+      { q: "Name three fermented dairy products covered in this unit.", a: ["Yoghurt", "Mala (fermented milk)", "Cheese"], m: 2 },
+      { q: "Explain the role of the starter culture in fermenting pasteurized milk.", a: ["Lactic acid bacteria convert lactose to lactic acid", "The acid lowers the pH so the milk sets and gains flavour"], m: 2 },
+      { q: "State four items that must appear on a fermented product's label.", a: ["Product name", "Batch number", "Production date", "Expiry date", "Net quantity", "Storage instructions"], m: 2 }
+    ],
+    oral: [], mentorQ: [],
+    after: ["Clean and sanitise the vat, stirrer, probes and incubator.", "Return unused culture to cold storage, sealed and labelled.", "Record the cold store temperature.", "Remove PPE and wash your hands.", "File the production record with the batch number."],
+    notes: ["Yoghurt and mala are made by lactic acid bacteria turning lactose into lactic acid.", "Typical yoghurt: pasteurise at 85–90 °C, cool to 42–45 °C, inoculate, incubate at 42–45 °C for 4–6 hours to pH 4.5–4.6.", "Culture added to milk hotter than about 50 °C is killed.", "Cool promptly once set to stop over-acidification.", "Labels carry product name, batch number, production date and expiry date."],
+    record: "ferment"
+  },
+  {
+    id: "dairy4", no: 11, printNo: 4,
+    course: { programme: "DIPLOMA IN FOOD SCIENCE AND TECHNOLOGY", courseCode: "", unit: "PROCESS DAIRY PRODUCTS", unitCode: "0721 451 07A", series: "NOVEMBER 2026", classes: "" },
+    title: "Process ice-cream",
+    required: ["Assemble and sanitise the ice-cream equipment and assemble the ingredients as per the formulation", "Pasteurise, homogenise and age the mix at the specified temperature and time", "Aerate and freeze the mix to the specified overrun and draw temperature", "Analyse, pack and store the finished ice-cream to specification"],
+    time: 180,
+    resources: ["Milk, cream, sugar, skimmed milk powder, stabiliser and flavour as per the formulation", "Pasteuriser or jacketed vat and homogeniser (if available)", "Ageing tank or refrigerator at 2–4 °C", "Batch or continuous ice-cream freezer", "Thermometer, weighing scale and overrun measuring cup", "Hardening cabinet or deep freezer and cold store", "Packaging containers, lids and labels", "Product specification sheet and production record", "PPE: lab coat, hair net, gloves, insulated gloves"],
+    assessorNotes: ["Ageing normally takes 4 to 24 hours; the mix may be prepared in one session and frozen in the next.", "Check the draw temperature and the overrun calculation yourself.", "Take a photo at the overrun measurement and at the cold-store temperature log.", "Ensure the candidate has a name tag and registration code at the back and front."],
+    steps: [
+      { t: "Put on protective clothing and sanitise the equipment", how: ["Wear a clean lab coat, hair net and gloves.", "Clean and sanitise the vat, freezer barrel, dasher, utensils and containers.", "Check the freezer and hardening cabinet are at working temperature."], safety: "Use insulated gloves when handling the freezer barrel and frozen product." },
+      { t: "Assemble the ingredients", how: ["Weigh milk, cream, sugar, skimmed milk powder, stabiliser and flavour exactly as the formulation states.", "Record every quantity on the production record."], safety: "" },
+      { t: "Pasteurise and homogenise the mix", how: ["Dissolve the dry ingredients in the warm milk and stir until smooth.", "Pasteurise the mix at the temperature and time specified, for example 80 °C for 25 seconds or 69 °C for 30 minutes.", "Homogenise if the equipment is available, then cool quickly."], safety: "Hot mix scalds; stir with a long-handled paddle." },
+      { t: "Age the mix", how: ["Cool the mix to 2–4 °C and hold it in the ageing tank or refrigerator for the specified time, usually at least 4 hours and often overnight.", "Record the ageing temperature and start and end times."], safety: "Ageing lets fat and stabiliser hydrate for a smooth texture." },
+      { t: "Freeze and aerate the mix", how: ["Pour the aged mix into the freezer and run it according to the machine instructions.", "Freeze while whipping in air until the product reaches the specified draw temperature, usually about −5 to −6 °C.", "Measure the overrun: weigh a full cup of mix and the same cup of ice-cream; overrun % = (mix weight − ice-cream weight) ÷ ice-cream weight × 100.", "Record the draw temperature and overrun."], safety: "Keep hands away from the dasher and barrel while the freezer runs." },
+      { t: "Harden the product", how: ["Transfer the soft ice-cream immediately to the hardening cabinet or deep freezer at −25 °C or below.", "Hold until firm before final packing or storage.", "Record the hardening temperature and time."], safety: "Partly thawed and re-frozen ice-cream develops ice crystals." },
+      { t: "Analyse the finished ice-cream", how: ["Check overrun, texture and melt-down against the product specification.", "Carry out a sensory check: flavour, body, texture and appearance.", "Record all results and note any deviation."], safety: "" },
+      { t: "Pack, label and store", how: ["Fill the specified containers to the correct fill weight.", "Seal and label with product name, batch number and production date.", "Place in the cold store at the specified temperature and record the temperature on the log."], safety: "" }
+    ],
+    checklist: [
+      { t: "Ice-cream processing equipment correctly assembled and confirmed clean and sanitised", m: 3, g: "Award 3 marks or zero" },
+      { t: "Ice-cream ingredients correctly assembled and weighed as per formulation", m: 3, g: "Award 3 marks or zero" },
+      { crit: true, t: "Ice-cream mix pasteurised at the correct temperature and time", m: 3, g: "Award 3 marks or zero" },
+      { t: "Mix aged at the correct temperature for the specified hold time", m: 3, g: "Award 3 marks or zero" },
+      { t: "Mix aerated to the target overrun during freezing, with overrun correctly measured", m: 4, g: "Award 2 marks for achieving target, 2 for correct measurement" },
+      { t: "Frozen product reached the specified draw temperature and was hardened promptly", m: 3, g: "Award 3 marks or zero" },
+      { t: "Finished ice-cream's overrun, texture and sensory quality checked against specification and recorded", m: 3, g: "Award 3 marks or zero" },
+      { t: "Ice-cream packed at the correct fill weight, labelled and stored at the correct cold-store temperature", m: 3, g: "Award 1 mark each for filling, labelling and storage" }
+    ],
+    oralScored: [
+      { q: "Define overrun and explain why it matters to ice-cream texture.", a: ["The volume of air whipped into the mix during freezing, as a percentage", "Too little gives a dense, heavy product; too much gives a light product that melts fast and collapses"], m: 2 },
+      { q: "List four ingredients commonly used in an ice-cream mix.", a: ["Milk or cream", "Sugar", "Skimmed milk powder", "Stabiliser", "Flavour", "Starch"], m: 2 },
+      { q: "Explain why ice-cream must be transferred to hardening storage after freezing.", a: ["Freshly frozen ice-cream is still soft", "Hardening gives the final firm texture and prevents ice crystal growth"], m: 2 }
+    ],
+    oral: [], mentorQ: [],
+    after: ["Strip, clean and sanitise the freezer barrel and dasher.", "Check and record the cold store and hardening cabinet temperatures.", "Return unused ingredients to the correct storage.", "Remove PPE and wash your hands.", "File the production record."],
+    notes: ["Ice-cream steps: mix, pasteurise, homogenise, age, freeze with aeration, harden, pack and store.", "Age the mix at 2–4 °C for at least 4 hours so fat and stabiliser hydrate.", "Overrun % = (weight of mix − weight of ice-cream) ÷ weight of ice-cream × 100, for the same volume. Typical target 80–100%.", "Draw temperature is usually about −5 to −6 °C; harden at −25 °C or below.", "Thawing and refreezing causes ice crystals and a coarse texture."],
+    record: "icecream"
+  },
+  {
+    id: "dairy5", no: 12, printNo: 5,
+    course: { programme: "DIPLOMA IN FOOD SCIENCE AND TECHNOLOGY", courseCode: "", unit: "PROCESS DAIRY PRODUCTS", unitCode: "0721 451 07A", series: "NOVEMBER 2026", classes: "" },
+    title: "Process a concentrated milk product",
+    required: ["Assemble and sanitise the concentration equipment and assemble the ingredients for the specified product", "Pasteurise the milk and concentrate it under the specified vacuum and temperature to the target Brix or total solids", "Monitor and record the Brix reading throughout evaporation", "Analyse the finished product and fill, seal, label and store it to specification"],
+    time: 180,
+    resources: ["Fresh milk as specified", "Sugar (for sweetened condensed milk)", "Pasteuriser or jacketed vat", "Evaporator or vacuum pan with thermometer and vacuum gauge", "Brix refractometer and, for milk powder, a moisture meter", "Cans, tins or sachets, sealer and labels", "Product specification sheet and production record", "PPE: lab coat, heat-resistant gloves, apron, safety glasses"],
+    assessorNotes: ["Observe the vacuum and temperature settings and at least two Brix readings yourself.", "Confirm the endpoint Brix or total solids before the candidate stops evaporation.", "Take a photo at the refractometer reading and at the sealed, labelled product.", "Ensure the candidate has a name tag and registration code at the back and front."],
+    steps: [
+      { t: "Put on protective clothing and sanitise the equipment", how: ["Wear a lab coat, apron, heat-resistant gloves and safety glasses.", "Clean and sanitise the vat, evaporator, refractometer prism and containers.", "Check the vacuum pump, gauges and thermometer are working."], safety: "Vacuum pans and steam jackets can burn; follow the lock-out and start-up procedure." },
+      { t: "Assemble the ingredients", how: ["Measure the milk and, for sweetened condensed milk, the sugar as the formulation states.", "Record the quantities on the production record."], safety: "" },
+      { t: "Pasteurise the milk", how: ["Heat the milk to the temperature and time specified for the product.", "Add the sugar at the stage the formulation specifies and dissolve fully.", "Record the temperature and time."], safety: "" },
+      { t: "Load the evaporator and set the conditions", how: ["Transfer the pasteurised milk to the evaporator or vacuum pan.", "Set the vacuum and temperature specified, for example about 60–70 °C under vacuum.", "Record the set values."], safety: "Evaporating under vacuum lowers the boiling point and protects flavour and nutrients." },
+      { t: "Concentrate and monitor the Brix", how: ["Run the evaporation, keeping the vacuum and temperature within range.", "Take a sample at the specified intervals, cool it, and read the Brix on the refractometer. Record every reading with the time.", "Continue until the target Brix or total solids is reached: for example about 70–72 °Brix for sweetened condensed milk, or about 26–28% total solids for evaporated milk.", "Confirm the endpoint with your trainer before stopping."], safety: "Stopping early gives an unstable product; going past the target makes it too thick or crystallised." },
+      { t: "Analyse the finished product", how: ["Measure the final Brix or total solids, or the moisture content for milk powder (target usually below 5%).", "Check colour, consistency and taste against the product specification.", "Record all results and note any deviation."], safety: "" },
+      { t: "Fill, seal, label and store", how: ["Select the specified container: cans, tins or sachets.", "Fill to the specified quantity and seal correctly; check the seal.", "Label with product name, batch number, production date and expiry date.", "Store under the conditions specified for the product and present the record to your trainer."], safety: "A poor seal spoils a product designed to keep at room temperature." }
+    ],
+    checklist: [
+      { t: "Concentration equipment correctly assembled and confirmed clean and sanitised", m: 3, g: "Award 3 marks or zero" },
+      { t: "Ingredients for the specified concentrated product correctly assembled and measured", m: 3, g: "Award 3 marks or zero" },
+      { t: "Milk pasteurised at the correct temperature and time", m: 3, g: "Award 3 marks or zero" },
+      { crit: true, t: "Milk concentrated under the correct vacuum and temperature to the target Brix or total solids", m: 4, g: "Award 4 marks or zero" },
+      { t: "Brix, total solids or moisture monitored at intervals and every reading recorded", m: 4, g: "Award 2 marks for correct refractometer use, 2 for recording" },
+      { t: "Finished product analysed (Brix or moisture, colour, consistency, taste) against specification and recorded", m: 3, g: "Award 3 marks or zero" },
+      { t: "Product correctly filled, sealed, labelled and stored under the specified conditions", m: 3, g: "Award 1 mark each for sealing, labelling and storage" }
+    ],
+    oralScored: [
+      { q: "Name three concentrated milk products covered in this unit.", a: ["Sweetened condensed milk", "Evaporated milk", "Milk powder"], m: 2 },
+      { q: "Explain why sweetened condensed milk includes added sugar.", a: ["Sugar acts as a preservative by lowering water activity", "It allows the product to keep without sterilisation"], m: 2 },
+      { q: "Describe what Brix measures and why it is used to judge the concentration endpoint.", a: ["Brix measures dissolved solids (mainly sugar) as a percentage", "It shows how much water has been removed, so the endpoint is reached at the target Brix"], m: 2 }
+    ],
+    oral: [], mentorQ: [],
+    after: ["Release the vacuum safely and clean the evaporator and vat according to the procedure.", "Clean and dry the refractometer prism.", "Record the final storage conditions.", "Remove PPE and wash your hands.", "File the production record."],
+    notes: ["Concentrated products: sweetened condensed milk, evaporated milk and milk powder.", "Evaporation under vacuum removes water at a lower temperature and protects quality.", "Brix measures dissolved solids; the endpoint is judged by Brix, total solids or, for powder, moisture.", "Typical targets: sweetened condensed milk about 70–72 °Brix; evaporated milk about 26–28% total solids; milk powder moisture below 5%.", "Sugar preserves sweetened condensed milk by lowering water activity.", "Seal and label every container with batch number, production date and expiry date."],
+    record: "concmilk"
   }
+
 
 
 ];
@@ -514,6 +701,33 @@ const FEEDBACK_ITEMS = ["The app was easy to use", "It helped me learn or assess
 
 /* ================= Treatment and observation records ================= */
 const RECORDS = {
+  milkq: [
+    { g: "Sample" }, { k: "supplier", l: "Supplier or can number", t: "text" }, { k: "colour", l: "Colour", t: "select", o: ["Normal (white to slightly yellow)", "Abnormal"] }, { k: "odour", l: "Odour", t: "select", o: ["Normal", "Sour", "Feedy or cowy", "Chemical or other"] }, { k: "foreign", l: "Foreign material", t: "select", o: ["None", "Present"] },
+    { g: "Chemical tests" }, { k: "alcohol", l: "Alcohol test", t: "select", o: ["Negative (no clots)", "Positive (clots or flakes)"] }, { k: "naoh", l: "0.1 N NaOH used (ml) for 9 ml milk", t: "number", step: 0.1, key: "Fresh milk: about 1.4–1.8 ml (0.14–0.18% lactic acid)." }, { k: "lacto", l: "Lactometer reading (corrected to 20 °C)", t: "number", step: 0.5, key: "Normal milk: about 26 to 32." },
+    { g: "Microbial test" }, { k: "dye", l: "Dye-reduction test", t: "select", o: ["Methylene blue", "Resazurin"] }, { k: "mbrt", l: "Time for colour to disappear (hours)", t: "number", step: 0.25, key: "Methylene blue: 5 h or more very good; 2–5 h good; 0.5–2 h fair; under 0.5 h poor. Use your dairy's own chart if it differs." },
+    { g: "Decision" }, { k: "grade", l: "Grade given", t: "select", o: ["Accept", "Accept provisionally", "Reject"] }, { k: "date", l: "Date", t: "date", d: "today" }
+  ],
+  pasteur: [
+    { g: "Batch" }, { k: "batch", l: "Batch number", t: "text" }, { k: "volume", l: "Volume of milk (litres)", t: "number" }, { k: "method", l: "Method", t: "select", o: ["HTST (72 °C, 15 s)", "Vat / batch (63 °C, 30 min)"] },
+    { g: "Cycle achieved" }, { k: "temp", l: "Holding temperature reached (°C)", t: "number", step: 0.1 }, { k: "hold", l: "Holding time", t: "select", o: ["Full specified time", "Shorter than specified"] }, { k: "ph", l: "pH of milk", t: "number", step: 0.01, key: "Fresh milk pH about 6.6–6.8." }, { k: "pressure", l: "Pressure within range", t: "select", o: ["Yes", "No"] },
+    { g: "After the cycle" }, { k: "coolTemp", l: "Temperature after cooling (°C)", t: "number", step: 0.1, key: "Cool to 4 °C or below." }, { k: "phos", l: "Phosphatase test", t: "select", o: ["Negative (effective)", "Positive"] }, { k: "ppe", l: "Protective clothing worn", t: "multi", o: ["Apron", "Heat-resistant gloves", "Closed shoes", "Hair net"] }, { k: "date", l: "Date", t: "date", d: "today" }
+  ],
+  ferment: [
+    { g: "Product" }, { k: "product", l: "Product", t: "select", o: ["Yoghurt", "Mala", "Cheese", "Other"] }, { k: "batch", l: "Batch number", t: "text" },
+    { g: "Process achieved" }, { k: "pastTemp", l: "Pasteurisation temperature (°C)", t: "number", step: 0.5 }, { k: "pastMin", l: "Pasteurisation time (minutes)", t: "number" }, { k: "inocTemp", l: "Temperature when culture was added (°C)", t: "number", step: 0.5, key: "Yoghurt starter: usually 42–45 °C." }, { k: "incTemp", l: "Incubation temperature (°C)", t: "number", step: 0.5 }, { k: "incHours", l: "Incubation time (hours)", t: "number", step: 0.25 },
+    { g: "Finished product" }, { k: "finalPh", l: "Final pH", t: "number", step: 0.01, key: "Yoghurt set point: about pH 4.5–4.6." }, { k: "sensory", l: "Sensory check against specification", t: "select", o: ["Meets specification", "Deviation noted"] }, { k: "label", l: "Label shows", t: "multi", o: ["Product name", "Batch number", "Production date", "Expiry date"] }, { k: "date", l: "Date", t: "date", d: "today" }
+  ],
+  icecream: [
+    { g: "Batch" }, { k: "batch", l: "Batch number", t: "text" },
+    { g: "Process achieved" }, { k: "pastTemp", l: "Mix pasteurisation temperature (°C)", t: "number", step: 0.5 }, { k: "ageTemp", l: "Ageing temperature (°C)", t: "number", step: 0.5, key: "Usually 2–4 °C." }, { k: "ageHours", l: "Ageing time (hours)", t: "number", step: 0.5, key: "Usually at least 4 hours." }, { k: "drawTemp", l: "Draw temperature (°C)", t: "number", step: 0.5, key: "Usually about −5 to −6 °C." },
+    { g: "Overrun" }, { k: "cupMix", l: "Weight of cup of mix (g)", t: "number" }, { k: "cupIce", l: "Weight of same cup of ice-cream (g)", t: "number" }, { k: "targetOverrun", l: "Target overrun (%)", t: "number", key: "From the product specification; often 80–100%." },
+    { g: "Storage" }, { k: "storeTemp", l: "Cold-store temperature (°C)", t: "number", step: 0.5, key: "Hardening and storage usually −18 °C or colder." }, { k: "date", l: "Date", t: "date", d: "today" }
+  ],
+  concmilk: [
+    { g: "Product" }, { k: "product", l: "Product", t: "select", o: ["Sweetened condensed milk", "Evaporated milk", "Milk powder"] }, { k: "batch", l: "Batch number", t: "text" },
+    { g: "Evaporation" }, { k: "evapTemp", l: "Evaporation temperature (°C)", t: "number", step: 0.5, key: "Under vacuum, usually about 60–70 °C." }, { k: "brix1", l: "Brix reading 1", t: "number", step: 0.1 }, { k: "brix2", l: "Brix reading 2", t: "number", step: 0.1 }, { k: "brix3", l: "Final Brix or total solids (%)", t: "number", step: 0.1, key: "Sweetened condensed milk about 70–72 °Brix; evaporated milk about 26–28% total solids." }, { k: "moisture", l: "Moisture content for milk powder (%)", t: "number", step: 0.1, key: "Usually below 5%." },
+    { g: "Finished product" }, { k: "sensory", l: "Colour, consistency and taste", t: "select", o: ["Meets specification", "Deviation noted"] }, { k: "seal", l: "Seal checked", t: "select", o: ["Good", "Faulty"] }, { k: "date", l: "Date", t: "date", d: "today" }
+  ],
   metab: [
     { g: "History" }, { k: "species", l: "Animal", t: "text" }, { k: "calved", l: "Days since calving", t: "number" }, { k: "posture", l: "Posture", t: "select", o: ["Standing normally", "Standing, staggering", "Lying on the chest, head turned to the flank", "Lying flat on the side"] },
     { g: "Findings by body region" }, { k: "temp", l: "Rectal temperature (°C)", t: "number", step: 0.1, key: "Normal adult cattle: about 38.0 to 39.5 °C." }, { k: "hr", l: "Heart rate (beats per minute)", t: "number" }, { k: "rr", l: "Breathing rate (breaths per minute)", t: "number" }, { k: "rumen", l: "Rumen movements", t: "select", o: ["Normal", "Reduced", "Absent"] }, { k: "signs", l: "Other signs", t: "multi", o: ["Cold ears and legs", "Dull eyes or dilated pupils", "Dry muzzle", "Muscle tremors", "Convulsions", "Weak heart sounds", "Bloat"] },
@@ -583,7 +797,25 @@ function recCalc(r) {
   if (r.after && r.after !== "Normal") out.push({ label: "After procedure", value: r.after + ": report to the assessor", level: "warn" });
   if (r.aspirated === "No") out.push({ label: "Injection", value: "Always pull back the plunger before injecting", level: "warn" });
   if (r.sharps === "Other") out.push({ label: "Sharps", value: "Needles must go into a sharps container", level: "bad" });
-  const tc = num(r.temp); if (tc != null) out.push(tc < 38 ? { label: "Temperature", value: tc + " °C is below normal (38.0–39.5 °C)", level: "warn" } : tc > 39.5 ? { label: "Temperature", value: tc + " °C is above normal (38.0–39.5 °C): fever", level: "warn" } : { label: "Temperature", value: tc + " °C is within the normal range", level: "ok" });
+  // Dairy checks
+  if (r.alcohol === "Positive (clots or flakes)") out.push({ label: "Alcohol test", value: "Positive: milk is unstable to heat. Reject.", level: "bad" });
+  const na = num(r.naoh); if (na != null) { const la = na * 0.1; out.push(la > 0.18 ? { label: "Acidity", value: la.toFixed(2) + "% lactic acid: above 0.18%, milk is souring", level: "bad" } : la < 0.13 ? { label: "Acidity", value: la.toFixed(2) + "% lactic acid: unusually low; check for added water or neutraliser", level: "warn" } : { label: "Acidity", value: la.toFixed(2) + "% lactic acid: normal (0.14–0.18%)", level: "ok" }); }
+  const lc = num(r.lacto); if (lc != null) out.push(lc < 26 ? { label: "Lactometer", value: lc + ": below 26 suggests added water", level: "bad" } : lc > 32 ? { label: "Lactometer", value: lc + ": above 32 suggests skimming", level: "warn" } : { label: "Lactometer", value: lc + ": within normal range (26–32)", level: "ok" });
+  const mb = num(r.mbrt); if (mb != null && r.dye !== "Resazurin") out.push(mb >= 5 ? { label: "Methylene blue", value: mb + " h: very good", level: "ok" } : mb >= 2 ? { label: "Methylene blue", value: mb + " h: good", level: "ok" } : mb >= 0.5 ? { label: "Methylene blue", value: mb + " h: fair", level: "warn" } : { label: "Methylene blue", value: mb + " h: poor, high bacterial load", level: "bad" });
+  if (r.grade === "Accept" && (r.alcohol === "Positive (clots or flakes)" || (na != null && na * 0.1 > 0.18) || (mb != null && mb < 0.5))) out.push({ label: "Grade", value: "You accepted milk that failed a test. Check your decision.", level: "bad" });
+  const ht = num(r.temp); if (ht != null && r.method) { const minT = r.method.indexOf("HTST") === 0 ? 72 : 63; if (ht < minT) out.push({ label: "Holding temperature", value: ht + " °C is below " + minT + " °C: milk is NOT pasteurised. Re-run the cycle.", level: "bad" }); else out.push({ label: "Holding temperature", value: ht + " °C reached", level: "ok" }); }
+  if (r.hold === "Shorter than specified") out.push({ label: "Holding time", value: "Holding time too short: re-pasteurise the batch", level: "bad" });
+  const ct = num(r.coolTemp); if (ct != null) out.push(ct > 4 ? { label: "Cooling", value: ct + " °C: cool to 4 °C or below", level: "warn" } : { label: "Cooling", value: ct + " °C: storage temperature reached", level: "ok" });
+  if (r.phos === "Positive") out.push({ label: "Phosphatase", value: "Positive: pasteurisation not effective. Do not release the batch.", level: "bad" });
+  const it = num(r.inocTemp); if (it != null) out.push(it > 50 ? { label: "Inoculation", value: it + " °C will kill the starter culture; cool to 42–45 °C first", level: "bad" } : it < 38 ? { label: "Inoculation", value: it + " °C is too cool; fermentation will be slow", level: "warn" } : { label: "Inoculation", value: it + " °C: suitable for yoghurt culture", level: "ok" });
+  const fp = num(r.finalPh); if (fp != null) out.push(fp > 4.8 ? { label: "Final pH", value: fp + ": not yet set; continue incubation", level: "warn" } : fp < 4.2 ? { label: "Final pH", value: fp + ": over-acid; cool earlier next time", level: "warn" } : { label: "Final pH", value: fp + ": set point reached", level: "ok" });
+  const cm = num(r.cupMix), ci = num(r.cupIce); if (cm != null && ci != null && ci > 0) { const ov = (cm - ci) / ci * 100, tg = num(r.targetOverrun); out.push({ label: "Overrun", value: ov.toFixed(0) + "% = (" + cm + " − " + ci + ") ÷ " + ci + " × 100", level: "info" }); if (tg != null) out.push(Math.abs(ov - tg) <= 10 ? { label: "Overrun check", value: "Within 10% of the target " + tg + "%", level: "ok" } : { label: "Overrun check", value: ov.toFixed(0) + "% is " + (ov > tg ? "above" : "below") + " the target " + tg + "%", level: "warn" }); }
+  const dr = num(r.drawTemp); if (dr != null && dr > -4) out.push({ label: "Draw temperature", value: dr + " °C is too warm; usually −5 to −6 °C", level: "warn" });
+  const st = num(r.storeTemp); if (st != null && st > -18) out.push({ label: "Cold store", value: st + " °C: ice-cream should be stored at −18 °C or colder", level: "warn" });
+  const bx = num(r.brix3); if (bx != null && r.product) { const tgt = r.product === "Sweetened condensed milk" ? [70, 72] : r.product === "Evaporated milk" ? [26, 28] : null; if (tgt) out.push(bx < tgt[0] ? { label: "Endpoint", value: bx + ": below the target " + tgt[0] + "–" + tgt[1] + "; continue evaporation", level: "warn" } : bx > tgt[1] ? { label: "Endpoint", value: bx + ": above the target " + tgt[0] + "–" + tgt[1] + "; over-concentrated", level: "warn" } : { label: "Endpoint", value: bx + ": target reached", level: "ok" }); }
+  const mo = num(r.moisture); if (mo != null) out.push(mo > 5 ? { label: "Moisture", value: mo + "%: above 5%, powder will not keep", level: "warn" } : { label: "Moisture", value: mo + "%: within limit", level: "ok" });
+  if (r.seal === "Faulty") out.push({ label: "Seal", value: "Faulty seal: the product will spoil. Re-seal.", level: "bad" });
+  const tc = num(r.temp); if (tc != null && !r.method) out.push(tc < 38 ? { label: "Temperature", value: tc + " °C is below normal (38.0–39.5 °C)", level: "warn" } : tc > 39.5 ? { label: "Temperature", value: tc + " °C is above normal (38.0–39.5 °C): fever", level: "warn" } : { label: "Temperature", value: tc + " °C is within the normal range", level: "ok" });
   const hrv = num(r.hr); if (hrv != null && (hrv < 48 || hrv > 84)) out.push({ label: "Heart rate", value: hrv + " per minute is outside the usual 48–84 for adult cattle", level: "warn" });
   if (r.dx && r.drug) { const want = { "Milk fever (low calcium)": "Calcium borogluconate", "Grass tetany (low magnesium)": "Magnesium sulphate (Epsom salt)" }[r.dx]; if (want) out.push(r.drug === want ? { label: "Drug of choice", value: "Matches your diagnosis", level: "ok" } : { label: "Drug of choice", value: r.drug + " does not correct the deficiency in " + r.dx.toLowerCase() + ". Think again.", level: "bad" }); }
   const nl = num(r.nLat), ll = num(r.latL);
